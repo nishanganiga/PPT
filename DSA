@@ -180,3 +180,519 @@ return digits;
         return false;
     }
     return 
+
+
+Assignment-4
+-------------
+1)  public List<Integer> arraysIntersection(int[] arr1, int[] arr2, int[] arr3) {
+        List<Integer> intersection = new ArrayList<Integer>();
+        int length1 = arr1.length, length2 = arr2.length, length3 = arr3.length;
+        int index1 = 0, index2 = 0, index3 = 0;
+        while (index1 < length1 && index2 < length2 && index3 < length3) {
+            int num1 = arr1[index1], num2 = arr2[index2], num3 = arr3[index3];
+            if (num1 == num2 && num1 == num3) {
+                intersection.add(num1);
+                index1++;
+                index2++;
+                index3++;
+            } else {
+                int increment1 = 0, increment2 = 0, increment3 = 0;
+                if (num1 < num2 || num1 < num3)
+                    increment1 = 1;
+                if (num2 < num1 || num2 < num3)
+                    increment2 = 1;
+                if (num3 < num1 || num3 < num2)
+                    increment3 = 1;
+                index1 += increment1;
+                index2 += increment2;
+                index3 += increment3;
+            }
+        }
+        return intersection;
+    }
+2) public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
+        List<List<Integer>> ans = new ArrayList<>();
+        HashSet<Integer> set1 = new HashSet<>();
+        HashSet<Integer> set2 = new HashSet<>();
+          
+        for(int i = 0 ; i < nums1.length; i ++){
+            set1.add(nums1[i]);
+        }
+          for(int i = 0 ; i < nums2.length; i ++){
+            set2.add(nums2[i]);
+        }
+         List<Integer> list1 = new ArrayList<>();
+          for(int i = 0 ; i < nums1.length; i ++){
+            if(!set2.contains(nums1[i]) && !list1.contains(nums1[i])){
+                list1.add(nums1[i]);
+            }
+        }
+         ans.add(list1);
+          List<Integer> list2 = new ArrayList<>();
+          for(int i = 0 ; i < nums2.length; i ++){
+            if(!set1.contains(nums2[i]) && !list2.contains(nums2[i])){
+                list2.add(nums2[i]);
+            }
+        }
+        ans.add(list2);
+        return ans;
+        
+
+    }
+3)  public int[][] transpose(int[][] matrix) {
+        int row=matrix.length;
+        int col=matrix[0].length;
+        int arr[][]=new int[col][row];
+        for(int i=0;i<col;i++)
+        {
+            for(int j=0;j<row;j++)
+            {
+            arr[i][j]=matrix[j][i];
+            }
+        }
+        return arr;
+        
+    }
+4) public int arrayPairSum(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        int sum = 0;
+        for (int i = 0; i < n; i += 2) {
+            sum += nums[i];
+        }
+        return sum;
+    }
+5)public int arrangeCoins(int n) {
+         int i = 1; // which row we are on
+		while(n > 0){ // checking to see if we have used all our coins
+			i++; // increasing our row
+			n = n-i; // adding coins to our row
+		}
+		return i-1;
+    }
+6)  public int[] sortedSquares(int[] nums) {
+        int n = nums.length;
+        int[] result = new int[n];
+        int left = 0;
+        int right = n - 1;
+        int i = n - 1;
+
+        while (left <= right) {
+            int leftSquare = nums[left] * nums[left];
+            int rightSquare = nums[right] * nums[right];
+
+            if (leftSquare > rightSquare) {
+                result[i] = leftSquare;
+                left++;
+            } else {
+                result[i] = rightSquare;
+                right--;
+            }
+
+            i--;
+        }
+
+        return result;
+    }
+7) public int maxCount(int m, int n, List<List<Integer>> ops) {
+        Map<Integer, Integer> xs = new HashMap<>();
+        Map<Integer, Integer> ys = new HashMap<>();
+
+        for (List<Integer> op : ops) {
+            for (int i = 1; i <= op.get(0); i++) {
+                xs.put(i, xs.getOrDefault(i, 0) + 1);
+            }
+            for (int j = 1; j <= op.get(1); j++) {
+                ys.put(j, ys.getOrDefault(j, 0) + 1);
+            }
+        }
+
+        int maxX = m;
+        int maxY = n;
+        int maxXval = 0;
+        int maxYval = 0;
+
+        for (Map.Entry<Integer, Integer> entry : xs.entrySet()) {
+            int k = entry.getKey();
+            int v = entry.getValue();
+            if (v >= maxXval) {
+                maxX = k;
+                maxXval = v;
+            }
+        }
+
+        for (Map.Entry<Integer, Integer> entry : ys.entrySet()) {
+            int k = entry.getKey();
+            int v = entry.getValue();
+            if (v >= maxYval) {
+                maxY = k;
+                maxYval = v;
+            }
+        }
+
+        return maxX * maxY;
+    }
+8) public int[] shuffle(int[] nums, int n) {
+        int[] ans=new int[nums.length];
+        int mid=nums.length/2;
+        int j=0;
+        for(int i=0;i<nums.length;i=i+2){
+           ans[i]=nums[j];
+           j++;
+        }
+        j=mid;
+         for(int i=1;i<nums.length;i=i+2){
+           ans[i]=nums[j];
+           j++;
+        }
+        return ans;
+    }
+    Assignment-5
+------------
+1) public int[][] construct2DArray(int[] original, int m, int n) {
+        if(m * n != original.length) return new int[][]{};
+        int[][] ans=new int[m][n];
+        int k=0;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                ans[i][j]=original[k++];
+            }
+        }
+        return ans;
+    }
+
+2)public int arrangeCoins(int n) {
+         int i = 1; // which row we are on
+		while(n > 0){ // checking to see if we have used all our coins
+			i++; // increasing our row
+			n = n-i; // adding coins to our row
+		}
+		return i-1;
+    }
+3)public int[] sortedSquares(int[] nums) {
+        int n = nums.length;
+        int[] result = new int[n];
+        int left = 0;
+        int right = n - 1;
+        int i = n - 1;
+
+        while (left <= right) {
+            int leftSquare = nums[left] * nums[left];
+            int rightSquare = nums[right] * nums[right];
+
+            if (leftSquare > rightSquare) {
+                result[i] = leftSquare;
+                left++;
+            } else {
+                result[i] = rightSquare;
+                right--;
+            }
+
+            i--;
+        }
+
+        return result;
+    }
+4)  public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
+        List<List<Integer>> ans = new ArrayList<>();
+        HashSet<Integer> set1 = new HashSet<>();
+        HashSet<Integer> set2 = new HashSet<>();
+          
+        for(int i = 0 ; i < nums1.length; i ++){
+            set1.add(nums1[i]);
+        }
+          for(int i = 0 ; i < nums2.length; i ++){
+            set2.add(nums2[i]);
+        }
+         List<Integer> list1 = new ArrayList<>();
+          for(int i = 0 ; i < nums1.length; i ++){
+            if(!set2.contains(nums1[i]) && !list1.contains(nums1[i])){
+                list1.add(nums1[i]);
+            }
+        }
+         ans.add(list1);
+          List<Integer> list2 = new ArrayList<>();
+          for(int i = 0 ; i < nums2.length; i ++){
+            if(!set1.contains(nums2[i]) && !list2.contains(nums2[i])){
+                list2.add(nums2[i]);
+            }
+        }
+        ans.add(list2);
+        return ans;
+        
+
+    }
+5) public int findTheDistanceValue(int[] arr1, int[] arr2, int d) {
+        int ans=0;
+        for (int i =0;i<arr1.length;i++){
+            for (int j =0;j<arr2.length;j++){
+                if (Math.abs(arr1[i]-arr2[j])<=d){
+                   ans++;
+                   break;
+                }
+            }
+        }
+        return (arr1.length-ans); 
+    }
+6)    public List<Integer> findDuplicates(int[] nums) {
+       int n = nums.length;
+        int[] cs = new int[n+1];
+        ArrayList<Integer> al = new ArrayList<>();
+        for(int i = 0; i < n; i++){
+            cs[nums[i]] += 1;
+        }
+        for(int i = 0; i < cs.length; i++){
+            if(cs[i] == 2){
+                al.add(i);
+            }
+        }
+        return al;
+    }
+        
+    }
+7)  public int findMin(int[] nums) {
+        int n = nums.length;
+        int flag = 0;
+    
+        for(int i=0; i<n-1; i++)
+        {
+            if(nums[i] > nums[i+1]) {
+                flag = 1;
+                break;
+            }
+        }
+
+        if(flag == 0) {
+            return nums[0];
+        }
+        
+        int s = 0;
+        int e = n-1;
+        int mid = s + (e-s)/2;
+
+        while(s<e) 
+        {
+            if(nums[0] <= nums[mid]) {
+                s = mid+1;
+            }
+            else if(nums[0] > nums[mid]) {
+                e = mid;
+            }
+            mid = s+(e-s)/2;
+        }
+        return nums[s];
+    }
+8)public int[] findOriginalArray(int[] changed) {
+        
+        int len = changed.length;
+        if((len&1) != 0) return new int[0];
+        
+        // Sorting the array
+        Arrays.sort(changed);
+        
+        // Store frequencies in map
+        Map<Integer,Integer> map = new HashMap<>();
+        for(int e : changed) map.put(e,map.getOrDefault(e,0)+1);
+        
+        int[] res = new int[len/2];
+        int k = 0;
+        for(int i=0; i<len; i++){
+            int ele = changed[i];
+            
+            // if map contains 'ele'
+            if(map.containsKey(ele)){
+                
+                // if map contains 'ele*2'
+                if(map.containsKey(ele*2)){
+                    res[k++] = ele;
+                    
+                    // reduce frequency of 'ele' and 'ele*2' 
+                    map.put(ele,map.get(ele)-1);
+                    map.put(ele*2,map.get(ele*2)-1);
+                    
+                    // if freq of any key becomes <=0, remove it from map 
+                    if(map.get(ele)<=0) map.remove(ele);
+                    if(map.containsKey(ele*2) && map.get(ele*2)<=0) map.remove(ele*2);
+                }
+                else return new int[0];
+            }
+            
+        }
+        return res;
+    }
+Assignment-6
+-------------
+1) public int[] diStringMatch(String s) {
+        int[] result = new int[s.length() + 1];
+        int end = result.length - 1, start = 0;
+        int index = 0;
+        while(index < s.length()){
+            if(s.charAt(index) == 'I'){
+                result[index] = start;   
+                start++;
+            }else{
+                result[index] = end;
+                end--;
+            }
+            index++;
+        }
+        result[result.length - 1] = start;
+        return result;
+    }
+2)public boolean searchMatrix(int[][] matrix, int target) {
+        
+     int n=matrix[0].length-1;
+     for(int i=0;i<matrix.length;i++){
+         if(target<=matrix[i][n]){
+             int s=0;
+             int e=n;
+             while(s<=e){
+                 int m=(s+e)/2;
+                 if(matrix[i][m]==target) return true;
+                 else if(matrix[i][m]<target){
+                     s=m+1;
+                 }else{
+                     e=m-1;
+                 }
+
+             }
+
+
+         }
+     }
+     return false;
+3) public boolean validMountainArray(int[] arr) {
+        int n = arr.length;
+        if (n < 3) return false; 
+        int i = 0;
+        while (i < n-1 && arr[i] < arr[i+1]) {
+            i++;
+        }
+        if (i == 0 || i == n-1) return false;
+        
+        while (i < n-1 && arr[i] > arr[i+1]) {
+            i++;
+        }
+        return i == n-1; 
+    }
+4) public int findMaxLength(int[] nums) {
+        HashMap<Integer,Integer>  hmap = new HashMap<>();
+        int maxLength = 0;
+        int sum = 0;
+        for(int i = 0 ; i < nums.length; i++) {
+            sum += (nums[i] == 0 ? -1 : nums[i]);
+            if(sum == 0)
+                maxLength = i+1;
+            else if(hmap.containsKey(sum)) {
+                maxLength = Math.max(maxLength,i - hmap.get(sum));
+            }
+            else 
+                hmap.put(sum,i);
+        }
+        return maxLength;
+    }
+5) public int minProductSum(int[] nums1, int[] nums2) {
+        int ans = 0;
+        // Sort nums1 and nums2 in ascending order.
+        Arrays.sort(nums2);
+        Arrays.sort(nums1);
+        
+        int i = 0;
+        int j = nums2.length-1;
+              
+        while(i < nums1.length && j >= 0)
+        {
+            ans += nums1[i] * nums2[j];
+            i++;
+            j--;
+        }
+        
+        return ans;
+    }
+6)   public int[] findOriginalArray(int[] changed) {
+        
+        int len = changed.length;
+        if((len&1) != 0) return new int[0];
+        
+        // Sorting the array
+        Arrays.sort(changed);
+        
+        // Store frequencies in map
+        Map<Integer,Integer> map = new HashMap<>();
+        for(int e : changed) map.put(e,map.getOrDefault(e,0)+1);
+        
+        int[] res = new int[len/2];
+        int k = 0;
+        for(int i=0; i<len; i++){
+            int ele = changed[i];
+            
+            // if map contains 'ele'
+            if(map.containsKey(ele)){
+                
+                // if map contains 'ele*2'
+                if(map.containsKey(ele*2)){
+                    res[k++] = ele;
+                    
+                    // reduce frequency of 'ele' and 'ele*2' 
+                    map.put(ele,map.get(ele)-1);
+                    map.put(ele*2,map.get(ele*2)-1);
+                    
+                    // if freq of any key becomes <=0, remove it from map 
+                    if(map.get(ele)<=0) map.remove(ele);
+                    if(map.containsKey(ele*2) && map.get(ele*2)<=0) map.remove(ele*2);
+                }
+                else return new int[0];
+            }
+            
+        }
+        return res;
+    }
+7)  public int[][] generateMatrix(int n) {
+        int [][] a = new int[n][n];
+        int l=0,t=0,b=n-1,r=n-1,v=1;
+        while(t<=b||l<=r){
+         if(t<=b){
+             for(int i=l;i<=r;i++)
+                a[t][i]=v++;
+             t++;
+         }
+         if(l<=r){
+             for(int i=t;i<=b;i++)
+                 a[i][r]=v++;
+             r--;
+         }
+         if(t<=b){
+             for(int i=r;i>=l;i--)
+             a[b][i]=v++;
+             b--;
+         }
+         if(t<=b){
+             for(int i=b;i>=t;i--)
+             a[i][l]=v++;
+         }
+         l++;
+        }
+        return a;
+    }
+8)public int[][] multiply(int[][] mat1, int[][] mat2) {
+        int r1 = mat1.length, c1 = mat1[0].length, c2 = mat2[0].length;
+        int[][] res = new int[r1][c2];
+        Map<Integer, List<Integer>> mp = new HashMap<>();
+        for (int i = 0; i < r1; ++i) {
+            for (int j = 0; j < c1; ++j) {
+                if (mat1[i][j] != 0) {
+                    mp.computeIfAbsent(i, k -> new ArrayList<>()).add(j);
+                }
+            }
+        }
+        for (int i = 0; i < r1; ++i) {
+            for (int j = 0; j < c2; ++j) {
+                if (mp.containsKey(i)) {
+                    for (int k : mp.get(i)) {
+                        res[i][j] += mat1[i][k] * mat2[k][j];
+                    }
+                }
+            }
+        }
+        return res;
+    }
